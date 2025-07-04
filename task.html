@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Boxes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .box {
+      width: 300px;
+      background-color: white;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .box.expanded {
+      height: auto;
+    }
+
+    .box-options {
+      margin-top: 15px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .box.expanded .box-options {
+      display: flex;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    select {
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="box1">
+    <h3>Top Box</h3>
+    <div class="box-options">
+      <div class="option-group">
+        <label for="color1">Color:</label>
+        <select id="color1" onchange="changeColor(this, 'box1')">
+          <option value="white">White</option>
+          <option value="lightblue">Light Blue</option>
+          <option value="lightgreen">Light Green</option>
+          <option value="salmon">Salmon</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <label for="size1">Size:</label>
+        <select id="size1" onchange="changeSize(this, 'box1')">
+          <option value="300px">Small</option>
+          <option value="400px">Medium</option>
+          <option value="500px">Large</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="box" id="box2">
+    <h3>Middle Box</h3>
+    <div class="box-options">
+      <div class="option-group">
+        <label for="color2">Color:</label>
+        <select id="color2" onchange="changeColor(this, 'box2')">
+          <option value="white">White</option>
+          <option value="lightblue">Light Blue</option>
+          <option value="lightgreen">Light Green</option>
+          <option value="salmon">Salmon</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <label for="size2">Size:</label>
+        <select id="size2" onchange="changeSize(this, 'box2')">
+          <option value="300px">Small</option>
+          <option value="400px">Medium</option>
+          <option value="500px">Large</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="box" id="box3">
+    <h3>Bottom Box</h3>
+    <div class="box-options">
+      <div class="option-group">
+        <label for="color3">Color:</label>
+        <select id="color3" onchange="changeColor(this, 'box3')">
+          <option value="white">White</option>
+          <option value="lightblue">Light Blue</option>
+          <option value="lightgreen">Light Green</option>
+          <option value="salmon">Salmon</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <label for="size3">Size:</label>
+        <select id="size3" onchange="changeSize(this, 'box3')">
+          <option value="300px">Small</option>
+          <option value="400px">Medium</option>
+          <option value="500px">Large</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+
+    boxes.forEach(box => {
+      box.addEventListener('click', function (e) {
+        // Prevent toggling when interacting with selects
+        if (e.target.tagName.toLowerCase() === 'select') return;
+
+        box.classList.toggle('expanded');
+      });
+    });
+
+    function changeColor(selectElem, boxId) {
+      document.getElementById(boxId).style.backgroundColor = selectElem.value;
+    }
+
+    function changeSize(selectElem, boxId) {
+      document.getElementById(boxId).style.width = selectElem.value;
+    }
+  </script>
+</body>
+</html>
